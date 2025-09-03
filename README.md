@@ -2,4 +2,4 @@ This repository cretated for work on course [DataLearn](https://github.com/Data-
 
 ### Modules
 
-- [Module01](Module01/README.md)
+- [Module1](Module1/README.md)
