@@ -8,7 +8,7 @@
    It is necessary to draw a high-level architecture for an analytical solution for your company or for a fictional company
    ```
 
-   ![Architecture](Architecture%20for%20an%20analytical%20solution.drawio)
+   ![Architecture](./Architecture_for_an_analytical_solution.drawio.png)
 
 2. Analytics use Excel
    
