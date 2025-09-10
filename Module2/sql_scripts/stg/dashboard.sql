@@ -1,7 +1,8 @@
 --- sales and profit dynamic
 select
+	TO_CHAR(order_date, 'YYYY-MM') as order_date_year_month,
 	ROUND(SUM(sales), 2) as sum_sales_by_month,
-	ROUND(SUM(profit), 2) as sum_profit_by_month,
+	ROUND(SUM(profit), 2) as sum_profit_by_month
 from stg.order
 group by order_date_year_month
 order by order_date_year_month ASC;
@@ -28,9 +29,21 @@ group by category;
 ---sales by customer
 select
 	customer_id,
+	customer_name,
 	ROUND(SUM(sales), 2) as total_sales
 from stg.order
-group by customer_id;
+group by customer_id, customer_name
+order by customer_id ASC;
+---
+
+---avg sales by customer
+select
+	customer_id,
+	customer_name,
+	ROUND(AVG(sales), 2) as avg_sales
+from stg.order
+group by customer_id, customer_name
+order by customer_id ASC;
 ---
 
 --- sales and profit by manager
@@ -65,38 +78,28 @@ select
 	state,
 	ROUND(SUM(sales), 2) as total_sales
 from stg.order
-group by state;
----
-
-
---- sales by city
-select
-	city,
-	ROUND(SUM(sales), 2) as total_sales
-from stg.order
-group by city;
+group by state
+order by total_sales;
 ---
 
 --- returned orders
+with returned_status as (
+	select
+		distinct order_id,
+		case 
+			when r.returned is null then 'NO'
+			else 'YES'
+		end as returned
+	from stg.order o
+	left join stg.return r using(order_id)
+	order by order_id
+)
 select
-	order_id,
-	case 
-		when r.returned is null then 'NO'
-		else 'YES'
-	end as returned
-from stg.order o
-LEFT join stg.return r USING(order_id)
-order by order_id;
----
-
-
---- profit per order
-select 
-    order_id,
-    ROUND(SUM(profit), 2) as profit 
-from stg.order 
-group by order_id 
-order by profit desc;
+	ROUND(
+		(COUNT(distinct order_id) filter (where returned = 'YES') / 
+		COUNT(distinct order_id)::DECIMAL) * 100, 2
+	) as returned_orders
+from returned_status
 ---
 
 
