@@ -31,6 +31,6 @@
    - AWS QuickSight
    - Klipfolio
 
-    I used _. Dashboard image can find there -> [dashboard](./images)
+    I used Looker Studio, because it is free. Dashboard -> [dashboard](./images/dashboard.png)
 
 ---
