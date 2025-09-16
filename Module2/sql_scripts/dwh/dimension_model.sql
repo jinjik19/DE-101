@@ -140,12 +140,59 @@ select
 	ship_mode
 from (select distinct ship_mode from stg."order" ) a;
 
+-- ************************************** orders_dim
+drop table if exists dwh.orders_dim;
+CREATE TABLE dwh.orders_dim
+(
+ order_key   serial NOT NULL,
+ order_id    varchar(20) NOT NULL,
+ returned    boolean NOT NULL,
+ CONSTRAINT PK_orders_dim PRIMARY KEY ( order_key )
+);
+
+truncate table dwh.orders_dim;
+
+insert into dwh.orders_dim
+select
+	row_number() over() as order_key,
+	order_id,
+    returned
+from (
+    select 
+        distinct o.order_id,
+        case 
+            when r.returned is null then false 
+            else true
+        end as returned
+    from stg."order" o
+    left join stg."return" r on r.order_id = o.order_id
+) a;
+
+-- ************************************** managers_dim
+drop table if exists dwh.managers_dim;
+CREATE TABLE dwh.managers_dim
+(
+ manager_key serial NOT NULL,
+ person      varchar(20) NOT NULL,
+ region    varchar(20) NOT NULL,
+ CONSTRAINT PK_managers_dim PRIMARY KEY ( manager_key )
+);
+
+truncate table dwh.managers_dim;
+
+insert into dwh.managers_dim
+select
+	row_number() over() as manager_key,
+	person,
+    region
+from (select distinct person, region from stg."people") a;
+
 -- ************************************** sales_fct
 drop table if exists dwh.sales_fct;
 CREATE TABLE dwh.sales_fct
 (
  sales_key	 serial NOT NULL,
- order_id    varchar(20) NOT NULL,
+ order_key   int NOT NULL,
  sales       numeric(9, 4) NOT NULL,
  quantity    int NOT NULL,
  profit      numeric(21, 16) NOT NULL,
@@ -156,19 +203,24 @@ CREATE TABLE dwh.sales_fct
  ship_key     int NOT NULL,
  ship_date_key   int NOT NULL,
  order_date_key  int NOT NULL,
+ manager_key    int NOT NULL,
  CONSTRAINT PK_fct_sales PRIMARY KEY ( sales_key ),
+ CONSTRAINT orders_dim FOREIGN KEY ( order_key ) REFERENCES dwh.orders_dim ( order_key ),
  CONSTRAINT FK_product_dim FOREIGN KEY ( product_key ) REFERENCES dwh.product_dim ( product_key ),
  CONSTRAINT FK_location_dim FOREIGN KEY ( geo_key ) REFERENCES dwh.geo_dim ( geo_key ),
  CONSTRAINT FK_customer_dim FOREIGN KEY ( customer_key ) REFERENCES dwh.customer_dim ( customer_key ),
  CONSTRAINT FK_shipping_dim FOREIGN KEY ( ship_key ) REFERENCES dwh.shipping_dim ( ship_key ),
  CONSTRAINT FK_calendar_dim_ship_date FOREIGN KEY ( ship_date_key ) REFERENCES dwh.calendar_dim ( date_key ),
- CONSTRAINT FK_calendar_dim_order_date FOREIGN KEY ( order_date_key ) REFERENCES dwh.calendar_dim ( date_key )
+ CONSTRAINT FK_calendar_dim_order_date FOREIGN KEY ( order_date_key ) REFERENCES dwh.calendar_dim ( date_key ),
+ CONSTRAINT FK_manager_dim FOREIGN KEY ( manager_key ) REFERENCES dwh.managers_dim ( manager_key )
 );
+
+truncate table dwh.sales_fct;
 
 insert into dwh.sales_fct
 select
 	row_number() over() as sales_key,
-	o.order_id,
+	od.order_key,
 	o.sales,
 	o.quantity,
 	o.profit,
@@ -178,12 +230,15 @@ select
 	cd.customer_key,
 	s.ship_key,
 	TO_CHAR(o.ship_date, 'YYYYMMDD')::INT AS ship_date_key,
-	TO_CHAR(o.order_date, 'YYYYMMDD')::INT AS order_date_key
+	TO_CHAR(o.order_date, 'YYYYMMDD')::INT AS order_date_key,
+	m.manager_key
 from stg."order" o
 inner join dwh.product_dim p on o.product_name = p.product_name and o.segment=p.segment and o.subcategory=p.subcategory and o.category=p.category and o.product_id=p.product_id 
 inner join dwh.geo_dim g on o.postal_code::varchar = g.postal_code and g.country=o.country and g.city = o.city and o.state = g.state
 inner join dwh.customer_dim cd on cd.customer_id=o.customer_id and cd.customer_name=o.customer_name
-inner join dwh.shipping_dim s on o.ship_mode = s.ship_mode;
+inner join dwh.shipping_dim s on o.ship_mode = s.ship_mode
+inner join dwh.orders_dim od on o.order_id = od.order_id
+inner join dwh.managers_dim m on o.region = m.region;
 
 --################ query for dashboard
 select * from dwh.sales_fct sf
@@ -191,4 +246,6 @@ inner join dwh.shipping_dim s on sf.ship_key=s.ship_key
 inner join dwh.geo_dim g on sf.geo_key=g.geo_key
 inner join dwh.product_dim p on sf.product_key=p.product_key
 inner join dwh.customer_dim c on sf.customer_key=c.customer_key
-inner join dwh.calendar_dim cd on sf.order_date_key=cd.date_key;
+inner join dwh.calendar_dim cd on sf.order_date_key=cd.date_key
+inner join dwh.orders_dim od on sf.order_key=od.order_key
+inner join dwh.managers_dim m on sf.manager_key=m.manager_key;
