@@ -7,4 +7,4 @@
 Updated dashboard [here](./images/updated_dashboard.png)
 -----
 
-2. I need to familiarize myself with the BI tool Tableau Desktop. After that, I need to create a dashboard in Tableau.
+2. I need to familiarize myself with the BI tool Tableau Desktop. After that, I need to create a dashboard in Tableau. You can find dashboards [here](./images/tableau/)
