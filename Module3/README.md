@@ -7,6 +7,10 @@
 Updated dashboard [here](./images/updated_dashboard.png)
 -----
 
-2. I need to familiarize myself with the BI tool Tableau Desktop. After that, I need to create a dashboard in Tableau. You can find dashboards [here](./images/tableau/)
+2. This task is an introduction to Tableau Desktop. After that, I need to create a dashboard in Tableau. I used data from [dimension model](../Module2/sql_scripts/dwh/dimension_model.sql). You can find dashboards [here](./images/tableau/)
+
+-----
+
+3. This task is an introduction to PowerBI. After that, I need to create a dashboard in Power BI. You can find dashboards [here](./images/power_bi/)
 
 -----
