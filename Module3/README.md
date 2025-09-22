@@ -1,4 +1,7 @@
 # Homework for Module 3
+-----
+This module introduce to BI tools.
+-----
 
 ## Tasks
 
@@ -11,6 +14,6 @@ Updated dashboard [here](./images/updated_dashboard.png)
 
 -----
 
-3. This task is an introduction to PowerBI. After that, I need to create a dashboard in Power BI. You can find dashboards [here](./images/power_bi/)
+1. This task used data [Airbnb London](https://www.kaggle.com/datasets/labdmitriy/airbnb). I need to create a dashboard to select the most attractive area for renting a property. Dashboard in png format - [here](./images/tableau/airbnb_london.png), in twb format - [here](airbnb_london.twb)
 
 -----
