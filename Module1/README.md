@@ -21,3 +21,5 @@
     - Create a dashboard
     - And other Excel functionality of your choice.
    ```
+
+   Dashboard [here](Sample%20-%20Superstore-Dashboard.xlsx)
