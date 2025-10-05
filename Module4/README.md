@@ -7,3 +7,7 @@ This module introduce to ETL processes and tools.
 
 1. In this task, I need to complete the Pentaho jobs staging orders and dim_tables, and I should get the same result as in Module 2. I also need to create another transformation for the sales_fact table. 
 Pentaho jobs [here](./pentaho_jobs/)
+-----
+
+1. I need to find 9 ETL subsystems in Pentaho DI and describe their properties.
+   You can find overview and screenshots in [etl_subsystems](./etl_subsystems/README.md) 
