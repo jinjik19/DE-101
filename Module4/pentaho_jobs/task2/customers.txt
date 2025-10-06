@@ -1,0 +1,11 @@
+cus_lastname;cus_name;country_name;city_name;add_zipcode;add_street
+Shah;Mrignayani;India;Ludhiana;LU19140;186 uuhrbkhd street
+King;Elijah;United States;Columbus;CO17500;120 pcgjbzqw street
+Martin;Olivia;Canada;Montreal;MO12300;89 mxrljtnv street
+Williams;Johnathan;United States;Nashville-Davidson;NA19200;292 hxbfjyxe street
+Scott;Ruth;United Kingdom;London;LO11260;291 yoklmceg street
+Lindström;Love;Sweden;Linköping;LI19160;243 dpmprpwh street
+Bengtsson;Max;Sweden;Malmö;MA16380;41 fjffmbgi street
+García;Demetrius;United States;Memphis;ME17360;177 vfbrwjmw street
+Fobin;Jack;Norway;Oslo;OS17640;202 mpeqhosg street
+;;;;;
