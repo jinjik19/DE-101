@@ -16,3 +16,7 @@ Pentaho jobs [here](./pentaho_jobs/task1)
 
 3. I need to make task from chapter 9 from Pentaho Data Integration Beginner's Guide.
    Result in [pentaho_jobs/task2](./pentaho_jobs/task2/)
+
+-----
+
+4. I need to implement an ETL process for Superstore.xls using Apache Airflow/DBT/Clickhouse/Luigi/Apache NiFi. [Project](./superstore_project/README.md)
