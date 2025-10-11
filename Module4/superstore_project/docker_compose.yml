@@ -72,11 +72,13 @@ x-airflow-common:
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
     # The following line can be used to set a custom config file, stored in the local config folder
     AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
+    AIRFLOW_CONN_CLICKHOUSE_DW: clickhouse://$DW_USER:$DW_PASSWORD@clickhouse:8123/superstore_db
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+    - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -253,13 +255,14 @@ services:
     depends_on:
       <<: *airflow-common-depends-on
 
-  clickhouse_dw:
+  clickhouse:
     image: clickhouse/clickhouse-server:25.8
     environment:
       - CLICKHOUSE_USER=$DW_USER
       - CLICKHOUSE_PASSWORD=$DW_PASSWORD
     volumes:
       - clickhouse_data:/var/lib/clickhouse
+      - ./initdb:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8123/ping"]
       interval: 10s
@@ -274,7 +277,7 @@ services:
     image: metabase/metabase:v0.56.8.x
     container_name: datalearn_metabase
     depends_on:
-      clickhouse_dw:
+      clickhouse:
         condition: service_healthy
     ports:
       - "3000:3000"

@@ -1,0 +1,26 @@
+[project]
+name = "superstore-project"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "jinjik19",email = "ekrasnikov1918@gmail.com"}
+]
+readme = "README.md"
+requires-python = "3.12"
+dependencies = [
+    "pandas (==2.3.3)",
+    "clickhouse-connect (==0.9.2)"
+]
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.group.dev.dependencies]
+jupyterlab = "4.4.9"
+apache-airflow = "3.1.0"
+ruff = "0.14.0"
+mypy = "1.18.2"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
