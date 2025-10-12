@@ -19,4 +19,4 @@ Pentaho jobs [here](./pentaho_jobs/task1)
 
 -----
 
-4. I need to implement an ETL process for Superstore.xls using Apache Airflow/DBT/Clickhouse/Luigi/Apache NiFi. [Superstore Project]([./superstore_project/README.md](https://github.com/jinjik19/superstore_project.git))
+4. I need to implement an ETL process for Superstore.xls using Apache Airflow/DBT/Clickhouse/Luigi/Apache NiFi. [Superstore Project](https://github.com/jinjik19/superstore_project.git)
