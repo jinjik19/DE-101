@@ -29,3 +29,26 @@ ARCHITECTURE:
 
 Connect to private and public ec2 by ssh:
 ![ssh_conn](./images/aws/ssh_conn.png)
+
+
+AZURE:
+
+VNET:
+![vnet](./images/azure/VNet.png)
+
+SUBNET:
+![subnet](./images/azure/subnets.png)
+
+ROUTE_TABLE:
+![route_table](./images/azure/route_table.png)
+
+NAT_GATEWAY:
+![nat_gateway](./images/azure/nat_gateways.png)
+
+ARCHITECTURE:
+![architecture](./images/azure/Azure%20architecture.drawio.svg)
+
+Connect to private and public ec2 by ssh:
+![ssh_conn](./images/azure/ssh_conn.png)
+
+-----
