@@ -26,3 +26,6 @@ INTERNET_GATEWAY:
 
 ARCHITECTURE:
 ![architecture](./images/aws/AWS%20architecture.drawio.svg)
+
+Connect to private and public ec2 by ssh:
+![ssh_conn](./images/aws/ssh_conn.png)
