@@ -163,3 +163,19 @@ Stopped EC2 Instance2
 When I stopped the second instance EC2, Load Balancer use only EC2 Instance1 and response was:
 Example Website 3
 ![website3](./images/aws/ec2_alb/exmaple_website3.png)
+
+-----
+
+3. I need to create S3 bucket, copy file to s3 use AWS CLI and encrypt file in bucket.
+
+Use KMS for encrypt bucket
+![kms](./images/aws/use_kms_encrypt_for_bucket.png)
+
+Encrypted bucket
+![encrypted_bucket](./images/aws/encrypted_bucket.png)
+
+Copy local file to s3 bucket
+![copy_local_file](./images/aws/cli_cp_file.png)
+
+Check file in bucket encrypted
+![check](./images/aws/check_file_encrypted.png)
