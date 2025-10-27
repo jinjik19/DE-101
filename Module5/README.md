@@ -179,3 +179,21 @@ Copy local file to s3 bucket
 
 Check file in bucket encrypted
 ![check](./images/aws/check_file_encrypted.png)
+
+-----
+
+4. In this module I studied work with Lambda function.
+
+Lambda function
+![lambda_func](./images/aws/lambda.png)
+
+Lambda function code
+![lambda_func_code](./images/aws/lambda_code.png)
+
+Lambda function output
+![lambda_func_oupute](./images/aws/lambda_output.png)
+
+CloudWatch Logs
+![cloudwatch_logs](./images/aws/cloudwatch_logs.png)
+
+-----
