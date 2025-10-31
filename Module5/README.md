@@ -197,3 +197,27 @@ CloudWatch Logs
 ![cloudwatch_logs](./images/aws/cloudwatch_logs.png)
 
 -----
+
+5. I need to update Architecture schema from module 1 use AWS/Azure components and answer to 6 questions:
+   Why, Who, What, Where, When, How.
+
+   ![architecture](./images/aws/Architecture_for_an_analytical_solution.drawio.png)
+
+   Why - We make single source of truth and can answer to difficult questions: "Which templates bring us the highest-paying customers?"
+
+   Who - Product manager, Marketing department, finance department and owner.
+
+   What - Dashboards should be updated at least once a day(in the morning).
+
+   Where - Infrastructure will be deploy in AWS Cloud. Personal Data will be save in DWH Encryption ar Rest. FOr BI Encryption in Transit in AWS Private Network.
+
+   When - MVP - 1 month.
+
+   How:
+   1. Setup Infrastructure
+   2. Develop ETL and Staging Layer
+   3. Modelling Business Layer
+   4. Visualization with BI tool
+   5. Monitoring and support
+
+-----
